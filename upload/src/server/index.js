@@ -1,5 +1,5 @@
-import path from 'path';
-
+import config from './config';
+import models from './models';
 import initControllers from './controllers';
 import initServices from './services';
 import routes from './controllers/routes';
@@ -7,7 +7,7 @@ import hooks from './hooks';
 import middlewares from './middlewares';
 import policies from './policies';
 
-export default strapi => {
+export default (strapi) => {
   const services = initServices(strapi);
   const controllers = initControllers(strapi);
 
@@ -18,8 +18,8 @@ export default strapi => {
     teardown() {
       // close a connection
     },
-    config: strapi.loaders.loadDir(path.join(__dirname, '/config')),
-    models: strapi.loaders.loadDir(path.join(__dirname, '/models')),
+    config,
+    models,
     routes,
     controllers,
     services,
